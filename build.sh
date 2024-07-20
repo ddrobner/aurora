@@ -13,7 +13,8 @@ RELEASE="$(rpm -E %fedora)"
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-rpm-ostree install screen
+rpm-ostree install git 1password zsh
+
 
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
@@ -21,3 +22,9 @@ rpm-ostree install screen
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+cat flatpaks | while read line || [[ -n $line ]];
+do
+	flatpak install flathub $line
+done
